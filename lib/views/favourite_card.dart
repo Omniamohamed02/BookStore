@@ -7,7 +7,7 @@ class FavouriteCard extends StatelessWidget {
       margin: EdgeInsets.all(10),
       child: Stack(
         children: [
-          // الخلفية
+        
           Container(
             height: 150,
             width: double.infinity,
@@ -16,11 +16,11 @@ class FavouriteCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
           ),
-          // محتوى البطاقة
+          
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // صورة الكتاب
+              
               Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: Image.network(
@@ -28,7 +28,7 @@ class FavouriteCard extends StatelessWidget {
                   height: 100,
                 ),
               ),
-              // النصوص والتقييم
+              
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -65,7 +65,7 @@ class FavouriteCard extends StatelessWidget {
                   ),
                 ),
               ),
-              // أيقونة المفضلة
+            
               Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: Icon(Icons.favorite, color: Colors.red),
