@@ -1,51 +1,41 @@
-import 'package:bookstore/views/favourite.dart';
-import 'package:bookstore/views/home.dart';
-import 'package:bookstore/views/settings.dart';
 import 'package:flutter/material.dart';
 
-class BottomNavBar extends StatefulWidget {
-  @override
-  _BottomNavBarState createState() => _BottomNavBarState();
-}
 
-class _BottomNavBarState extends State<BottomNavBar> {
-  int _selectedIndex = 0;
+class BottomNavBar extends StatelessWidget {
+  final int selectedIndex;
+  final Function(int) onItemTapped;
 
-  final List<Widget> _pages = [
-    HomePage(),
-    FavouritePage(),
-    SettingsPage(),
-  ];
+  const BottomNavBar({
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+     required this.selectedIndex,
+     required this.onItemTapped,
+  }) ;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
-        onTap: _onItemTapped,
-      ),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+        child: BottomNavigationBar(
+          backgroundColor: Color(0xFFF2D9BB),
+          currentIndex: selectedIndex,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Color(0xFF17212C),
+          onTap: onItemTapped,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.bookmarks),
+              label: 'Favourite',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+            ),
+          ],
+        ),
     );
   }
 }
