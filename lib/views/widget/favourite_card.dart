@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
 
 class FavouriteCard extends StatelessWidget {
+  const FavouriteCard({super.key});
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin:const EdgeInsets.all(10),
       child: Stack(
         children: [
-          // الخلفية
-          Container(
+
+           Container(
             height: 150,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Color(0xFFF2D9BB),
+              color:const Color(0xFFF2D9BB),
               borderRadius: BorderRadius.circular(20),
             ),
           ),
-          // محتوى البطاقة
+
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // صورة الكتاب
+
               Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: Image.network(
@@ -28,10 +31,10 @@ class FavouriteCard extends StatelessWidget {
                   height: 100,
                 ),
               ),
-              // النصوص والتقييم
-              Expanded(
+
+              const Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  padding:  EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -65,9 +68,9 @@ class FavouriteCard extends StatelessWidget {
                   ),
                 ),
               ),
-              // أيقونة المفضلة
-              Padding(
-                padding: const EdgeInsets.all(25.0),
+
+              const Padding(
+                padding: EdgeInsets.all(25.0),
                 child: Icon(Icons.favorite, color: Colors.red),
               ),
             ],
