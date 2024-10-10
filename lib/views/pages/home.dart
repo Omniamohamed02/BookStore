@@ -11,6 +11,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: const Color(0xFFF2D9BB),
         title: Column(
@@ -18,11 +19,11 @@ class HomePage extends StatelessWidget {
           children: [
             Text(
               'Hello Sir',
-              style: TextStyle(fontSize: 20, color: Colors.grey[700]),
+              style: TextStyle(fontSize: 20, color: Color(0xFF17212C)),
             ),
             Text(
               'Which book you want to buy?',
-              style: TextStyle(fontSize: 20, color: Colors.grey[700]),
+              style: TextStyle(fontSize: 20, color: Color(0xFF17212C)),
             ),
           ],
         ),
@@ -36,36 +37,41 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          const  CustomSearchBar(),
-          Expanded(
-            child: FutureBuilder<Map<String, List<Book>>>(
-              future: BookService().fetchBooksFromCategories(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(child: Text('No books found'));
-                } else {
-                  final booksByCategory = snapshot.data!;
-                  return ListView(
-                    children: booksByCategory.entries.map((entry) {
-                      String category = entry.key;
-                      List<Book> books = entry.value.take(20).toList();
-                      return CatogreyTitle(
-                        category: category,
-                        books: books,
-                      );
-                    }).toList(),
-                  );
-                }
-              },
+      body: Padding(
+        padding: const EdgeInsets.only(top: 10, right: 0, bottom: 10, left: 12.0),
+        child: Column(
+          children: [
+            const  CustomSearchBar(),
+            Expanded(
+              child: FutureBuilder<Map<String, List<Book>>>(
+                future: BookService().fetchBooksFromCategories(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator(color:Color(0xFFF2D9BB) ,));
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Center(child: Text('No books found'));
+                  } else {
+                    final booksByCategory = snapshot.data!;
+                    return ListView(
+                      children: booksByCategory.entries.map((entry) {
+                        String category = entry.key;
+                        List<Book> books = entry.value.take(20).toList();
+
+
+                        return CatogreyTitle(
+                          category: category,
+                          books: books,
+                        );
+                      }).toList(),
+                    );
+                  }
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,4 @@
-import 'package:bookstore/views/pages/favourite.dart';
+import 'package:bookstore/views/pages/favorite_page.dart';
 import 'package:bookstore/views/pages/home.dart';
 import 'package:bookstore/views/pages/settings.dart';
 import 'package:flutter/material.dart';
@@ -51,9 +51,9 @@ class BottomNavBar extends StatelessWidget {
 
 class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
-  final List<Widget> pages = const[
-    HomePage(),
+  final List<Widget> pages = [
+    const HomePage(),
     FavouritePage(),
-    SettingsPage(),
+    const SettingsPage(),
   ];
 }

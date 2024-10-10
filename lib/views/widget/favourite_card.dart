@@ -1,6 +1,11 @@
+import 'package:bookstore/model/book.dart';
 import 'package:flutter/material.dart';
 
 class FavouriteCard extends StatelessWidget {
+  final Book book;
+   var remove ;
+
+  FavouriteCard({super.key, required this.book,required remove});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +27,7 @@ class FavouriteCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: Image.network(
-                  'https://www.headline.co.uk/wp-content/uploads/2019/01/hbg-title-9780747237662-43.jpg?resize=448,720',
+                  '${book.thumbnail}',
                   height: 100,
                 ),
               ),
@@ -33,7 +38,7 @@ class FavouriteCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Father',
+                        '${book.title}',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -42,7 +47,7 @@ class FavouriteCard extends StatelessWidget {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        'Anne Baker',
+                        '${book.authors}',
                         style: TextStyle(
                           fontSize: 14,
                           color: Color(0xFF454D56),
@@ -64,7 +69,7 @@ class FavouriteCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(25.0),
-                child: Icon(Icons.favorite, color: Colors.red),
+                child: IconButton(onPressed: remove, icon: Icon(Icons.favorite))
               ),
             ],
           ),
