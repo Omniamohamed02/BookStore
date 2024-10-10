@@ -53,23 +53,14 @@ class FavouriteCard extends StatelessWidget {
                           color: Color(0xFF454D56),
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Icon(Icons.star, color: Color(0xFF17212C)),
-                          Icon(Icons.star, color: Color(0xFF17212C)),
-                          Icon(Icons.star, color: Color(0xFF17212C)),
-                          Icon(Icons.star, color: Color(0xFF17212C)),
-                          Icon(Icons.star, color: Colors.grey),
-                        ],
-                      ),
+
                     ],
                   ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(25.0),
-                child: IconButton(onPressed: remove, icon: Icon(Icons.favorite))
+                child: IconButton(onPressed: remove, icon: Icon(Icons.delete))
               ),
             ],
           ),

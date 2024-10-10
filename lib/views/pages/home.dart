@@ -28,15 +28,13 @@ class HomePage extends StatelessWidget {
           ],
         ),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.notifications,
-              color: Color(0xFF17212C),
-            ),
-          ),
-        ],
-      ),
+          IconButton(onPressed: (){
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+    content: Text(
+    'Notifications On')));
+    }, icon: Icon(Icons.notifications,))
+    ]),
+
       body: Padding(
         padding: const EdgeInsets.only(top: 10, right: 0, bottom: 10, left: 12.0),
         child: Column(
@@ -72,7 +70,7 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+
+    ));
   }
 }

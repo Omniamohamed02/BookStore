@@ -1,8 +1,13 @@
-import 'package:bookstore/views/pages/favorite_page.dart';
 import 'package:bookstore/views/pages/home.dart';
-import 'package:bookstore/views/pages/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+
+import '../pages/favorite_page.dart';
+import '../pages/settings.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key});
@@ -12,34 +17,25 @@ class BottomNavBar extends StatelessWidget {
     final controller = Get.put(NavigationController());
     return Scaffold(
       bottomNavigationBar: Obx(
-        () => NavigationBar(
+              () => NavigationBar(
             backgroundColor: Color(0xFFF2D9BB),
             elevation: 2,
             selectedIndex: controller.selectedIndex.value,
             onDestinationSelected: (index) =>
-                controller.selectedIndex.value = index,
+            controller.selectedIndex.value = index,
             destinations: const [
               NavigationDestination(
-                  icon: Icon(Icons.home),
-                  selectedIcon: Icon(
-                    Icons.home,
-                    color: Color(0xFF17212C),
-                  ),
-                  label: 'Home'),
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
               NavigationDestination(
-                  icon: Icon(Icons.bookmarks),
-                  selectedIcon: Icon(
-                    Icons.bookmarks,
-                    color: Color(0xFF17212C),
-                  ),
-                  label: 'Favourite'),
+                icon: Icon(Icons.bookmarks),
+                label: 'Favourite',
+              ),
               NavigationDestination(
-                  icon: Icon(Icons.settings),
-                  selectedIcon: Icon(
-                    Icons.settings,
-                    color: Color(0xFF17212C),
-                  ),
-                  label: 'Settings'),
+                icon: Icon(Icons.settings),
+                label: 'Settings',
+              ),
             ],
           ),
         ),

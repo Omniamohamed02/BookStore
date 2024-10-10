@@ -16,7 +16,7 @@ class CartItem extends StatelessWidget {
           child: Container(
 
             margin:const  EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            height: 200,
+            height: 180,
             width: double.infinity,
             decoration: BoxDecoration(
               boxShadow: const [
@@ -36,20 +36,21 @@ class CartItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.symmetric(vertical: 40,horizontal: 20),
                 child: Image.network(
                   book.thumbnail,
-                  height: 150,
+                  height: 100,
                 ),
               ),
               Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Align(
-                          alignment: Alignment.topRight,
+                       Align(
+                         alignment: Alignment.topRight,
                           child: IconButton(
                             icon: const Icon(Icons.delete, ),
                             onPressed: remove

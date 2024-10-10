@@ -19,7 +19,7 @@ class BookCard extends StatelessWidget {
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 5),
-        height: 300,
+        height: 200,
         child: Column(
           children: [
         Expanded(
@@ -33,15 +33,15 @@ class BookCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                Text(book.title.length > 25
-                    ? '${book.title.substring(0, 25)}...'
+                Text(book.title.length > 20
+                    ? '${book.title.substring(0, 20)}...'
                     : book.title, style: const TextStyle(
                   color: Color(0xFF17212C),
                   fontSize: 16,
                   fontWeight: FontWeight.bold),
                  ),
-                   Text(book.authors.length > 25
-                       ? '${book.authors.substring(0, 25)}...'
+                   Text(book.authors.length > 20
+                       ? '${book.authors.substring(0, 20)}...'
                        : book.authors,
               style: const TextStyle(color: Color(0xFF454D56), fontSize: 12,),)
                 ],

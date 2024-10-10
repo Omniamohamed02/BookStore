@@ -20,8 +20,8 @@ class CategoryCard extends StatelessWidget {
       child: Stack(children: [
         Expanded(
           child: Container(
-            margin:const  EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            height: 200,
+            margin:const  EdgeInsets.all( 10),
+            height: 180,
             width: double.infinity,
             decoration: BoxDecoration(
               boxShadow: const [
@@ -41,17 +41,20 @@ class CategoryCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
           Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Image.network(
-              book.thumbnail,
-              height: 150,
+            padding: const EdgeInsets.symmetric(vertical: 40,horizontal: 20),
+            child: Center(
+              child: Image.network(
+                book.thumbnail,
+                height: 100,
+              ),
             ),
           ),
           Expanded(
               child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   book.title,

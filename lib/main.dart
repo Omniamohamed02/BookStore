@@ -1,6 +1,7 @@
 import 'package:bookstore/firebase_options.dart';
 import 'package:bookstore/model/cart.dart';
 import 'package:bookstore/model/favorite.dart';
+import 'package:bookstore/views/pages/auth.dart';
 import 'package:bookstore/views/widget/navagationbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -32,9 +33,7 @@ class MyApp extends StatelessWidget {
     ],
      child:  MaterialApp(
       debugShowCheckedModeBanner: false,
-       home: BlocProvider(
-         create: (context) => BookCubit(),
-         child:BottomNavBar(),
-    )));
+       home: Auth()
+    ));
   }
 }

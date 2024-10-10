@@ -9,7 +9,7 @@ class Description extends StatefulWidget {
   final Book book;
   final VoidCallback onFavoriteToggle;
 
-  const Description({super.key, required this.book, required this.onFavoriteToggle});
+  const Description({super.key, required this.book, required this.onFavoriteToggle,});
 
   @override
   State<Description> createState() => _DescriptionState();
@@ -30,7 +30,7 @@ class _DescriptionState extends State<Description> {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text(
                           'Added to favorite !')));
-                }, icon: Icon(Icons.favorite))
+                }, icon: Icon(Icons.favorite,color: Colors.red,))
               ],
             ),
             body: Padding(
