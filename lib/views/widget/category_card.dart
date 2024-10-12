@@ -1,7 +1,9 @@
 import 'package:bookstore/views/pages/description.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../model/book.dart';
+import '../../providers/theme_provider.dart';
 
 class CategoryCard extends StatelessWidget {
   final Book book;
@@ -10,6 +12,7 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemesProvider>(context);
     return GestureDetector(
       onTap: (){
         Navigator.push(context, MaterialPageRoute(
@@ -32,7 +35,7 @@ class CategoryCard extends StatelessWidget {
                   offset: Offset(0, 3),
                 ),
               ],
-              color: const Color(0xFFF2D9BB),
+              color: themeProvider.isDarkMode ? Color(0xFF4F5B61) : Color(0xFFF2D9BB),
               borderRadius: BorderRadius.circular(10),
             ),
           ),
@@ -69,21 +72,21 @@ class CategoryCard extends StatelessWidget {
                 ),
                 Text(
                   'Author: ${book.authors}',
-                  style:const TextStyle(
+                  style:TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF454D56),
+                      color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C)
                   ),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
-                const Text(
+                Text(
                   'Rate: 4.5',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF454D56),
+                      color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C)
                   ),
                 )
               ],

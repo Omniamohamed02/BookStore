@@ -1,6 +1,8 @@
 import 'package:bookstore/views/widget/category_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../model/book.dart';
+import '../../providers/theme_provider.dart';
 import '../widget/search_bar.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -11,10 +13,11 @@ class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemesProvider>(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: themeProvider.isDarkMode ? Color(0xFF303E44) : Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor:themeProvider.isDarkMode ? Color(0xFF303E44) : Color(0xFFF2D9BB),
         title: Text(category),
       ),
       body: Column(
