@@ -18,8 +18,8 @@ class Auth extends StatelessWidget {
             if(snapShot.hasData){
               return BlocProvider(
                   create: (context) => BookCubit(),
-            child:BottomNavBar());
-            }else {
+              child:BottomNavBar());
+              }else {
               return Welcome();
             }
           }),

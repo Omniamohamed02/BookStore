@@ -1,15 +1,19 @@
 import 'package:bookstore/model/book.dart';
-import 'package:bookstore/model/cart.dart';
-import 'package:bookstore/model/favorite.dart';
+import 'package:bookstore/providers/cart_provider.dart';
+import 'package:bookstore/providers/favorite_provider.dart';
+import 'package:bookstore/providers/theme_provider.dart';
 import 'package:bookstore/views/pages/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../generated/l10n.dart';
+import '../../providers/language_provider.dart';
+
 class Description extends StatefulWidget {
   final Book book;
-  final VoidCallback onFavoriteToggle;
 
-  const Description({super.key, required this.book, required this.onFavoriteToggle,});
+
+  const Description({super.key, required this.book,});
 
   @override
   State<Description> createState() => _DescriptionState();
@@ -18,18 +22,23 @@ class Description extends StatefulWidget {
 class _DescriptionState extends State<Description> {
   @override
   Widget build(BuildContext context) {
-    return Consumer2<Cart,Favorite>(
-        builder: (context,Cart ,Favourite,child){
+    final languageProvider = Provider.of<LanguageProvider>(context);
+    final localizations = S.of(context);
+
+    return Consumer3<CartProvider,FavoriteProvider,ThemesProvider>(
+        builder: (context,Cart ,Favourite,theme,child){
           return Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: theme.isDarkMode ? Color(0xFF303E44) : Colors.white,
             appBar: AppBar(
-              backgroundColor: const Color(0xFFF2D9BB),
+              title: Text(widget.book.title,),
+              centerTitle: true,
+              backgroundColor:theme.isDarkMode ? Color(0xFF303E44) : Color(0xFFF2D9BB),
               actions: [
                 IconButton(onPressed: (){
                   Favourite.addFav(widget.book);
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar( SnackBar(
                       content: Text(
-                          'Added to favorite !')));
+                          '${localizations.addedToFav}')));
                 }, icon: Icon(Icons.favorite,color: Colors.red,))
               ],
             ),
@@ -62,13 +71,13 @@ class _DescriptionState extends State<Description> {
                     // Information Section
                     Text.rich(
                       TextSpan(
-                        text: "Title: ",
+                        text: "${localizations.bookTitel}",
                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFFCCB08F)
                         ),
                         children: <TextSpan>[
                           TextSpan(
                             text: "${widget.book.title}", // Updated to use book.title
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF17212C)),
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color:theme.isDarkMode? Colors.white : Color(0xFF17212C)),
                           ),
                         ],
                       ),
@@ -77,13 +86,13 @@ class _DescriptionState extends State<Description> {
 
                     Text.rich(
                       TextSpan(
-                        text: "Category: ",
+                        text: "${localizations.category}",
                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFFCCB08F)
                         ),
                         children: <TextSpan>[
                           TextSpan(
                             text: "${widget.book.category}", // Updated to use book.category
-                            style: TextStyle(fontSize: 18, color: Color(0xFF17212C)),
+                            style: TextStyle(fontSize: 18, color:theme.isDarkMode? Colors.white : Color(0xFF17212C)),
                           ),
                         ],
                       ),
@@ -93,13 +102,13 @@ class _DescriptionState extends State<Description> {
                     // Description
                     Text.rich(
                       TextSpan(
-                        text: "Description: ",
+                        text: "${localizations.description}",
                         style: TextStyle(fontSize: 18, color: Color(0xFFCCB08F)
                         ),
                         children: <TextSpan>[
                           TextSpan(
                             text: "${widget.book.description}", // Updated to use book.pageCount
-                            style: TextStyle(color: Color(0xFF17212C)),
+                            style: TextStyle(color:theme.isDarkMode? Colors.white : Color(0xFF17212C)),
                           ),
                         ],
                       ),
@@ -109,39 +118,39 @@ class _DescriptionState extends State<Description> {
                     // Other Details
                     Text.rich(
                       TextSpan(
-                        text: "Author: ",
+                        text: "${localizations.author}",
                         style: TextStyle(fontSize: 18, color: Color(0xFFCCB08F)
                         ),
                         children: <TextSpan>[
                           TextSpan(
                             text: "${widget.book.authors}", // Updated to use book.authors
-                            style: TextStyle(color: Color(0xFF17212C)),
+                            style: TextStyle(color:theme.isDarkMode? Colors.white : Color(0xFF17212C)),
                           ),
                         ],
                       ),
                     ),
                     Text.rich(
                       TextSpan(
-                        text: "Published Date: ",
+                        text: "${localizations.publishDate} ",
                         style: TextStyle(fontSize: 18, color: Color(0xFFCCB08F)
                         ),
                         children: <TextSpan>[
                           TextSpan(
                             text: "${widget.book.publishedDate}", // Updated to use book.publishedDate
-                            style: TextStyle(color: Color(0xFF17212C)),
+                            style: TextStyle(color:theme.isDarkMode? Colors.white : Color(0xFF17212C)),
                           ),
                         ],
                       ),
                     ),
                     Text.rich(
                       TextSpan(
-                        text: "Pages: ",
+                        text: "${localizations.pages} ",
                         style: TextStyle(fontSize: 18, color: Color(0xFFCCB08F)
                         ),
                         children: <TextSpan>[
                           TextSpan(
                             text: "${widget.book.pageCount}", // Updated to use book.pageCount
-                            style: TextStyle(color: Color(0xFF17212C)),
+                            style: TextStyle(color:theme.isDarkMode? Colors.white : Color(0xFF17212C)),
                           ),
                         ],
                       ),
@@ -154,10 +163,12 @@ class _DescriptionState extends State<Description> {
                           child: ElevatedButton(
                             onPressed: () {
                               Cart.add(widget.book);
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>CartPage(book: widget.book,)));
+                              ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+                                  content: Text(
+                                      '${localizations.addedTCart}')));
 
                             },
-                            child: Text('Add to Cart', style: TextStyle(fontSize: 20, color: Colors.white)),
+                            child: Text('${localizations.atc}', style: TextStyle(fontSize: 20, color:theme.isDarkMode? Color(0xFF17212C) : Colors.white)),
                             style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                               minimumSize: Size(100, 40),

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../generated/l10n.dart';
 import '../../model/book.dart';
+import '../../providers/language_provider.dart';
+import '../../providers/theme_provider.dart';
 import '../pages/category.dart';
 import 'book-card.dart';
 
@@ -11,6 +15,9 @@ class CatogreyTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemesProvider>(context);
+    final languageProvider = Provider.of<LanguageProvider>(context);
+    final localizations = S.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -31,7 +38,7 @@ class CatogreyTitle extends StatelessWidget {
                     ));
               },
               child:
-              const Text('See more', style: TextStyle(color: Color(0xFF17212C))),
+              Text('${localizations.seemore}', style: TextStyle( color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C),)),
             ),
           ],
         ),

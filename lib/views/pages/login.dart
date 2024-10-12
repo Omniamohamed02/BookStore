@@ -30,7 +30,7 @@ class Login extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: 50,),
-                Image.asset('lib/assets/image/img.png',height: 150,),
+                Image.asset('lib/assets/image/bookstore.png',height: 150,),
                 SizedBox(height: 25,),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

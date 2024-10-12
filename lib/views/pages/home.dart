@@ -1,7 +1,12 @@
+import 'package:bookstore/views/pages/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bookstore/views/widget/catogrey_title.dart';
 import 'package:bookstore/views/widget/search_bar.dart';
 import 'package:bookstore/model/book.dart';
+import 'package:provider/provider.dart';
+import '../../generated/l10n.dart';
+import '../../providers/language_provider.dart';
+import '../../providers/theme_provider.dart';
 import '../../service/book_service.dart';
 
 
@@ -10,36 +15,37 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemesProvider>(context);
+    final languageProvider = Provider.of<LanguageProvider>(context);
+    final localizations = S.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+        backgroundColor: themeProvider.isDarkMode ? Color(0xFF303E44) : Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFF2D9BB),
+        backgroundColor:themeProvider.isDarkMode ? Color(0xFF303E44) : Color(0xFFF2D9BB),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hello Sir',
-              style: TextStyle(fontSize: 20, color: Color(0xFF17212C)),
+              '${localizations.homeappbar}',
+              style: TextStyle(fontSize: 20, color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C)),
             ),
             Text(
-              'Which book you want to buy?',
-              style: TextStyle(fontSize: 20, color: Color(0xFF17212C)),
-            ),
+              '${localizations.homeappbar1}',
+              style: TextStyle(fontSize: 20,color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C)),),
           ],
         ),
         actions: [
           IconButton(onPressed: (){
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-    content: Text(
-    'Notifications On')));
-    }, icon: Icon(Icons.notifications,))
-    ]),
+            Navigator.push(context, MaterialPageRoute(
+                builder: (context) =>CartPage()));
+           }, icon: Icon(Icons.shopping_cart,))
+           ]),
 
       body: Padding(
-        padding: const EdgeInsets.only(top: 10, right: 0, bottom: 10, left: 12.0),
+        padding: const EdgeInsets.only(top: 10, right: 10.0, bottom: 10, left: 10.0),
         child: Column(
           children: [
-            const  CustomSearchBar(),
+             CustomSearchBar(),
             Expanded(
               child: FutureBuilder<Map<String, List<Book>>>(
                 future: BookService().fetchBooksFromCategories(),

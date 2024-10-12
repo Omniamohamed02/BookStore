@@ -17,7 +17,7 @@ class Welcome extends StatelessWidget {
 
               children: [
                 SizedBox(height: 150,),
-                Image.asset('lib/assets/image/img.png',height:300 ),
+                Image.asset('lib/assets/image/bookstore.png',height:300 ),
                 SizedBox(height: 25,),
                 Text('Welcome',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 38,color: Color(0xFF17212C)
                 ),),

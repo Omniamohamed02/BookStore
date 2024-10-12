@@ -1,6 +1,9 @@
 import 'package:bookstore/model/book.dart';
 import 'package:bookstore/views/pages/description.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/theme_provider.dart';
 
 class CartItem extends StatelessWidget {
   final Book book;
@@ -9,6 +12,7 @@ class CartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemesProvider>(context);
     return Stack(
         children: [
 
@@ -22,12 +26,10 @@ class CartItem extends StatelessWidget {
               boxShadow: const [
                 BoxShadow(
                   color: Colors.grey,
-                  spreadRadius: 1,
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
+
                 ),
               ],
-              color: const Color(0xFFF2D9BB),
+              color: themeProvider.isDarkMode ? Color(0xFF4F5B61) : Color(0xFFF2D9BB),
               borderRadius: BorderRadius.circular(10),
             ),
           ),
@@ -58,10 +60,10 @@ class CartItem extends StatelessWidget {
                         ),
                         Text(
                           book.title,
-                          style:const TextStyle(
+                          style:TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF17212C),
+                              color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C)
                           ),
                         ),
                         const SizedBox(
@@ -69,21 +71,21 @@ class CartItem extends StatelessWidget {
                         ),
                         Text(
                           'Author: ${book.authors}',
-                          style:const TextStyle(
+                          style:TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF454D56),
+                              color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C)
                           ),
                         ),
                         const SizedBox(
                           height: 5,
                         ),
-                        const Text(
+                        Text(
                           'Rate: 4.5',
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF454D56),
+                              color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C)
                           ),
                         ),
 

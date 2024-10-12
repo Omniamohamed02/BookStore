@@ -19,7 +19,7 @@ class CategoryPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const CustomSearchBar(),
+           CustomSearchBar(),
           Expanded(
             child: ListView.builder(
               itemCount: books.length,

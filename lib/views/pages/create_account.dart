@@ -31,7 +31,7 @@ class CreateAccount extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: 100,),
-                Image.asset('lib/assets/image/img.png',height: 150,),
+                Image.asset('lib/assets/image/bookstore.png',height: 150,),
                 SizedBox(height: 60,),
                 MyTextfield(lable: 'Email', message: 'Please enter your email',controller: emailController,obscureText: false,isSignup: false,),
                 MyTextfield(lable: 'Password', message: 'please enter your password',controller: passwordController,obscureText: true,isSignup: true,),

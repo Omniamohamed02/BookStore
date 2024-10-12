@@ -1,23 +1,36 @@
 import 'package:bookstore/model/book.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/theme_provider.dart';
+import '../pages/description.dart';
 
 class FavouriteCard extends StatelessWidget {
   final Book book;
    var remove ;
 
-  FavouriteCard({super.key, required this.book,required remove});
+  FavouriteCard({super.key, required this.book,required this.remove });
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemesProvider>(context);
     return Container(
       margin: EdgeInsets.all(10),
       child: Stack(
         children: [
-          Container(
-            height: 150,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Color(0xFFF2D9BB),
-              borderRadius: BorderRadius.circular(20),
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => Description(
+                      book: book,
+                       )));
+            },
+            child: Container(
+              height: 150,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: themeProvider.isDarkMode ? Color(0xFF4F5B61) : Color(0xFFF2D9BB),
+                borderRadius: BorderRadius.circular(20),
+              ),
             ),
           ),
 
@@ -42,7 +55,7 @@ class FavouriteCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF17212C),
+                            color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C)
                         ),
                       ),
                       SizedBox(height: 5),
@@ -50,9 +63,10 @@ class FavouriteCard extends StatelessWidget {
                         '${book.authors}',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Color(0xFF454D56),
+                            color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C)
                         ),
                       ),
+                      SizedBox(height: 10),
 
                     ],
                   ),
@@ -60,7 +74,7 @@ class FavouriteCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(25.0),
-                child: IconButton(onPressed: remove, icon: Icon(Icons.delete))
+                child: IconButton(onPressed: remove, icon: Icon(Icons.favorite))
               ),
             ],
           ),

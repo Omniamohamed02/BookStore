@@ -1,7 +1,7 @@
 import 'package:bookstore/model/book.dart';
 import 'package:flutter/widgets.dart';
 
-class Favorite extends ChangeNotifier {
+class FavoriteProvider extends ChangeNotifier {
   List<Book> FavBooks =[];
 
 
