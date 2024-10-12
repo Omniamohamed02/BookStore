@@ -1,4 +1,4 @@
-import 'package:bookstore/views/pages/search_page.dart';
+import 'package:bookstore/views/pages/searchcategory.dart';
 import 'package:bookstore/views/widget/category_card.dart';
 import 'package:flutter/material.dart';
 import '../../model/book.dart';
@@ -21,7 +21,7 @@ class CategoryPage extends StatelessWidget {
                Navigator.push(
                   context,
                   MaterialPageRoute(
-                   builder: (context) => CustomSearchPage(book: books),
+                   builder: (context) => SearchBooksInCategory(books: books, category: category),
                       ),
     );}, icon: Icon(Icons.search))
         ],

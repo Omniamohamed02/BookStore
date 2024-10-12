@@ -21,14 +21,14 @@ class BookService {
 
   Future<Map<String, List<Book>>> fetchBooksFromCategories() async {
     List<String> categories = [
-      "science",
-      "history",
-      "technology",
-      "art",
-      "business",
-      "romance",
-      "horror",
-      "crime"
+      "Science",
+      "History",
+      "Technology",
+      "Art",
+      "Business",
+      "Romance",
+      "Horror",
+      "Crime"
     ];
 
     Map<String, List<Book>> allBooks = {};

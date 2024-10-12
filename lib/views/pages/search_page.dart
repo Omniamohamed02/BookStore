@@ -1,166 +1,150 @@
+import 'package:bookstore/service/book_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../model/book.dart';
-import 'package:bookstore/views/pages/category.dart';
-import 'package:bookstore/views/pages/description.dart';
+import '../../providers/theme_provider.dart';
+import 'category.dart';
 
-class CustomSearchPage extends StatefulWidget {
-  final List<Book> book;
+class SearchCategories extends StatefulWidget {
   final List<String> categories = [
-    "science",
-    "history",
-    "technology",
-    "art",
-    "business",
-    "romance",
-    "horror",
-    "crime"
+    "Science",
+    "History",
+    "Technology",
+    "Art",
+    "Business",
+    "Romance",
+    "Horror",
+    "Crime"
   ];
 
-  CustomSearchPage({super.key, required this.book});
+  SearchCategories({super.key});
 
   @override
-  _CustomSearchBarState createState() => _CustomSearchBarState();
+  _SearchCategoriesState createState() => _SearchCategoriesState();
 }
 
-class _CustomSearchBarState extends State<CustomSearchPage> {
+class _SearchCategoriesState extends State<SearchCategories> {
   TextEditingController searchController = TextEditingController();
   List<String> suggestions = [];
-  List<Book>? books;
+  Map<String, List<Book>>? allBooks;
 
   @override
   void initState() {
     super.initState();
-    loadBooks();
+    fetchBooksFromCategories();
   }
 
-  void loadBooks() async {
-    books = (await widget.book) as List<Book>?;
-    setState(() {});
+  Future<void> fetchBooksFromCategories() async {
+    try {
+      BookService bookService = BookService();
+      allBooks = await bookService.fetchBooksFromCategories();
+      setState(() {});
+    } catch (e) {
+      print('Error fetching books: $e');
+    }
+  }
+
+  List<Book> getBooksByCategory(String category) {
+    if (allBooks == null || !allBooks!.containsKey(category)) return [];
+    return allBooks![category]!;
   }
 
   void filterSuggestions(String query) {
     List<String> matches = [];
-    if (query.isNotEmpty && books != null) {
-      matches.addAll(widget.categories.where(
-              (category) =>
-              category.toLowerCase().contains(query.toLowerCase())));
-      matches.addAll(books!
-          .map((book) => book.title)
-          .where((title) => title.toLowerCase().contains(query.toLowerCase())));
+    if (query.isNotEmpty) {
+      matches.addAll(widget.categories.where((category) => category.toLowerCase().contains(query.toLowerCase())));
     }
     setState(() {
       suggestions = matches;
     });
   }
 
-  void navigateToCategory(String category) {
-
-    List<Book> filteredBooks = books!.where((book) => book.category == category).toList();
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => CategoryPage(category: category, books: [],),
-      ),
-    );
-  }
-
-  void navigateToBookDescription(String bookTitle) {
-    Book? selectedBook = books!.firstWhere(
-          (book) => book.title == bookTitle,
-      orElse: () =>
-          Book(
-            title: 'Unknown',
-            authors: 'Unknown',
-            thumbnail: '',
-            pageCount: 0,
-            publishedDate: '',
-            description: '',
-            category: '',
-          ),
-    );
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) =>
-            Description(book: selectedBook,),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemesProvider>(context);
+
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Search',
-            style: TextStyle(
-              fontSize: 28,
-              color: Color(0xFF17212C),
-            ),
-          ),
-        ),
-        backgroundColor: Colors.white,
-        body: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.all(10.0),
-                child: TextField(
-                  controller: searchController,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    contentPadding: const EdgeInsets.symmetric(vertical: 15.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide:
-                      const BorderSide(width: 0.8, color: Color(0xFF17212C)),
-                    ),
-                    hintText: 'Search for a Book or Category',
-                    prefixIcon: const Icon(Icons.search,
-                        size: 30, color: Color(0xFF17212C)),
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        searchController.clear();
-                        setState(() {
-                          suggestions = [];
-                        });
-                      },
-                      icon: const Icon(Icons.clear, color: Color(0xFF17212C)),
-                    ),
-                  ),
-                  onChanged: (value) {
-                    filterSuggestions(value);
+      appBar: AppBar(
+        title: Text('Search Categories'),
+      ),
+      body: allBooks == null
+          ? Center(child: CircularProgressIndicator())
+          : Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextField(
+              controller: searchController,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                contentPadding: const EdgeInsets.symmetric(vertical: 15.0),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                  borderSide: const BorderSide(width: 0.8, color: Color(0xFF17212C)),
+                ),
+                hintText: 'Search for a Category',
+                prefixIcon: const Icon(Icons.search, size: 30, color: Color(0xFF17212C)),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    searchController.clear();
+                    setState(() {
+                      suggestions = [];
+                    });
                   },
+                  icon: const Icon(Icons.clear, color: Color(0xFF17212C)),
                 ),
               ),
-              Expanded(
-                child: suggestions.isNotEmpty
-                    ? Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: ListView.separated(
-                    itemCount: suggestions.length,
-                    separatorBuilder: (context, index) =>
-                        Divider(color: Colors.grey),
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(suggestions[index]),
-                        onTap: () {
-
-                          if (widget.categories.contains(suggestions[index])) {
-
-                            navigateToCategory(suggestions[index]);
-                          } else {
-
-                            navigateToBookDescription(suggestions[index]);
-                          }
-                        },
-                      );
-                    },
-                  ),
-                )
-                    : Container(),
-              )
-            ]));
-  }}
+              onChanged: (value) {
+                filterSuggestions(value);
+              },
+            ),
+          ),
+          Expanded(
+            child: suggestions.isNotEmpty && searchController.text.isNotEmpty
+                ? ListView.separated(
+              itemCount: suggestions.length,
+              separatorBuilder: (context, index) => Divider(),
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(suggestions[index]),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CategoryPage(
+                          books: getBooksByCategory(suggestions[index]),
+                          category: suggestions[index],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            )
+                : ListView.separated(
+              itemCount: widget.categories.length,
+              separatorBuilder: (context, index) => Divider(),
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(widget.categories[index]),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CategoryPage(
+                          books: getBooksByCategory(widget.categories[index]),
+                          category: widget.categories[index],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

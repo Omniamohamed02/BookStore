@@ -2,7 +2,6 @@ import 'package:bookstore/model/book.dart';
 import 'package:bookstore/providers/cart_provider.dart';
 import 'package:bookstore/providers/favorite_provider.dart';
 import 'package:bookstore/providers/theme_provider.dart';
-import 'package:bookstore/views/pages/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

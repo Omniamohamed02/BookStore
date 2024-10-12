@@ -11,8 +11,9 @@ import '../../service/book_service.dart';
 
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
-  final List<Book>book=[];
+  HomePage({super.key,});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +24,18 @@ class HomePage extends StatelessWidget {
         backgroundColor: themeProvider.isDarkMode ? Color(0xFF303E44) : Colors.white,
       appBar: AppBar(
         backgroundColor:themeProvider.isDarkMode ? Color(0xFF303E44) : Color(0xFFF2D9BB),
+        leading: IconButton(onPressed: (){ Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => SearchCategories()
+          ),
+        );}, icon: Icon(Icons.search)),
         actions: [
           IconButton(onPressed: (){
             Navigator.push(context, MaterialPageRoute(
                 builder: (context) =>CartPage()));
            }, icon: Icon(Icons.shopping_cart,)),
-          IconButton(onPressed: (){ Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CustomSearchPage(book: book),
-            ),
-          );}, icon: Icon(Icons.search))
+
            ]),
 
       body: Padding(
