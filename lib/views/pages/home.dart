@@ -1,7 +1,7 @@
 import 'package:bookstore/views/pages/cart_page.dart';
+import 'package:bookstore/views/pages/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bookstore/views/widget/catogrey_title.dart';
-import 'package:bookstore/views/widget/search_bar.dart';
 import 'package:bookstore/model/book.dart';
 import 'package:provider/provider.dart';
 import '../../generated/l10n.dart';
@@ -11,7 +11,8 @@ import '../../service/book_service.dart';
 
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+  final List<Book>book=[];
 
   @override
   Widget build(BuildContext context) {
@@ -22,30 +23,30 @@ class HomePage extends StatelessWidget {
         backgroundColor: themeProvider.isDarkMode ? Color(0xFF303E44) : Colors.white,
       appBar: AppBar(
         backgroundColor:themeProvider.isDarkMode ? Color(0xFF303E44) : Color(0xFFF2D9BB),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '${localizations.homeappbar}',
-              style: TextStyle(fontSize: 20, color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C)),
-            ),
-            Text(
-              '${localizations.homeappbar1}',
-              style: TextStyle(fontSize: 20,color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C)),),
-          ],
-        ),
         actions: [
           IconButton(onPressed: (){
             Navigator.push(context, MaterialPageRoute(
                 builder: (context) =>CartPage()));
-           }, icon: Icon(Icons.shopping_cart,))
+           }, icon: Icon(Icons.shopping_cart,)),
+          IconButton(onPressed: (){ Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CustomSearchPage(book: book),
+            ),
+          );}, icon: Icon(Icons.search))
            ]),
 
       body: Padding(
         padding: const EdgeInsets.only(top: 10, right: 10.0, bottom: 10, left: 10.0),
         child: Column(
           children: [
-             CustomSearchBar(),
+            Text(
+            '${localizations.homeappbar}',
+            style: TextStyle(fontSize: 20, color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C)),
+          ),
+            Text(
+              '${localizations.homeappbar1}',
+              style: TextStyle(fontSize: 20,color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C)),),
             Expanded(
               child: FutureBuilder<Map<String, List<Book>>>(
                 future: BookService().fetchBooksFromCategories(),

@@ -1,7 +1,6 @@
 import 'package:bookstore/model/book.dart';
 import 'package:bookstore/providers/favorite_provider.dart';
 import 'package:bookstore/views/widget/favourite_card.dart';
-import 'package:bookstore/views/widget/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
