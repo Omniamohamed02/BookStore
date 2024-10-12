@@ -25,7 +25,7 @@ class FavouriteCard extends StatelessWidget {
                        )));
             },
             child: Container(
-              height: 150,
+              height: 200,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: themeProvider.isDarkMode ? Color(0xFF4F5B61) : Color(0xFFF2D9BB),
@@ -53,7 +53,7 @@ class FavouriteCard extends StatelessWidget {
                       Text(
                         '${book.title}',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                             color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C)
                         ),
@@ -74,7 +74,7 @@ class FavouriteCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(25.0),
-                child: IconButton(onPressed: remove, icon: Icon(Icons.favorite))
+                child: IconButton(onPressed: remove, icon: Icon(Icons.delete))
               ),
             ],
           ),
