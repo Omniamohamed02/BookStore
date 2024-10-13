@@ -22,6 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Search": MessageLookupByLibrary.simpleMessage("Search in "),
+        "SearchCategory":
+            MessageLookupByLibrary.simpleMessage("Search Categories"),
         "addedTCart": MessageLookupByLibrary.simpleMessage(
             "Book added to cart  successfully !"),
         "addedToFav":
@@ -58,6 +61,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "phone_number": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "publishDate": MessageLookupByLibrary.simpleMessage("Publish Date"),
+        "rate": MessageLookupByLibrary.simpleMessage("Rate"),
+        "searchForaBook":
+            MessageLookupByLibrary.simpleMessage("Search for a Book "),
+        "searchForaCategory":
+            MessageLookupByLibrary.simpleMessage("Search for a Category"),
         "seemore": MessageLookupByLibrary.simpleMessage("See more"),
         "select_language":
             MessageLookupByLibrary.simpleMessage("Select Language"),

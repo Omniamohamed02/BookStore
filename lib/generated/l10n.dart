@@ -409,6 +409,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Search Categories`
+  String get SearchCategory {
+    return Intl.message(
+      'Search Categories',
+      name: 'SearchCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search in `
+  String get Search {
+    return Intl.message(
+      'Search in ',
+      name: 'Search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rate`
+  String get rate {
+    return Intl.message(
+      'Rate',
+      name: 'rate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for a Book `
+  String get searchForaBook {
+    return Intl.message(
+      'Search for a Book ',
+      name: 'searchForaBook',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for a Category`
+  String get searchForaCategory {
+    return Intl.message(
+      'Search for a Category',
+      name: 'searchForaCategory',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

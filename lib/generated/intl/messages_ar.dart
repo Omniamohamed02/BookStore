@@ -22,6 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Search": MessageLookupByLibrary.simpleMessage("البحث في "),
+        "SearchCategory":
+            MessageLookupByLibrary.simpleMessage("البحث في الفئات"),
         "addedTCart": MessageLookupByLibrary.simpleMessage(
             "تمت إضافة الكتاب إلى سلة التسوق بنجاح!"),
         "addedToFav":
@@ -58,6 +61,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "phone_number": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
         "publishDate": MessageLookupByLibrary.simpleMessage("تاريخ النشر"),
+        "rate": MessageLookupByLibrary.simpleMessage("تقيم"),
+        "searchForaBook": MessageLookupByLibrary.simpleMessage("ابحث عن كتاب"),
+        "searchForaCategory":
+            MessageLookupByLibrary.simpleMessage("ابحث عن فئة"),
         "seemore": MessageLookupByLibrary.simpleMessage("رؤية المزيد"),
         "select_language": MessageLookupByLibrary.simpleMessage("اختر اللغة"),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),

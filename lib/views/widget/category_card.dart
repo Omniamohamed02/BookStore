@@ -2,6 +2,7 @@ import 'package:bookstore/views/pages/description.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../generated/l10n.dart';
 import '../../model/book.dart';
 import '../../providers/theme_provider.dart';
 
@@ -13,6 +14,7 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemesProvider>(context);
+    final localizations = S.of(context);
     return GestureDetector(
       onTap: (){
         Navigator.push(context, MaterialPageRoute(
@@ -71,7 +73,7 @@ class CategoryCard extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  'Author: ${book.authors}',
+                  '${localizations.author}: ${book.authors}',
                   style:TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -82,7 +84,7 @@ class CategoryCard extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  'Rate: 4.5',
+                  '${localizations.rate}: 4.5',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,

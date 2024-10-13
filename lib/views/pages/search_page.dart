@@ -1,7 +1,9 @@
 import 'package:bookstore/service/book_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../generated/l10n.dart';
 import '../../model/book.dart';
+import '../../providers/language_provider.dart';
 import '../../providers/theme_provider.dart';
 import 'category.dart';
 
@@ -62,10 +64,13 @@ class _SearchCategoriesState extends State<SearchCategories> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemesProvider>(context);
+    final localizations = S.of(context);
 
     return Scaffold(
+      backgroundColor: themeProvider.isDarkMode ? Color(0xFF303E44) : Colors.white,
       appBar: AppBar(
-        title: Text('Search Categories'),
+        backgroundColor:themeProvider.isDarkMode ? Color(0xFF303E44) : Color(0xFFF2D9BB),
+        title: Text(localizations.SearchCategory),
       ),
       body: allBooks == null
           ? Center(child: CircularProgressIndicator())
@@ -77,14 +82,14 @@ class _SearchCategoriesState extends State<SearchCategories> {
               controller: searchController,
               decoration: InputDecoration(
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: themeProvider.isDarkMode ? const Color(0xFF4F5B61) : Colors.white,
                 contentPadding: const EdgeInsets.symmetric(vertical: 15.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
                   borderSide: const BorderSide(width: 0.8, color: Color(0xFF17212C)),
                 ),
-                hintText: 'Search for a Category',
-                prefixIcon: const Icon(Icons.search, size: 30, color: Color(0xFF17212C)),
+                hintText: localizations.searchForaCategory,
+                prefixIcon: Icon(Icons.search, size: 30,  color:themeProvider.isDarkMode? Colors.white : const Color(0xFF17212C)),
                 suffixIcon: IconButton(
                   onPressed: () {
                     searchController.clear();
@@ -92,7 +97,7 @@ class _SearchCategoriesState extends State<SearchCategories> {
                       suggestions = [];
                     });
                   },
-                  icon: const Icon(Icons.clear, color: Color(0xFF17212C)),
+                  icon:  Icon(Icons.clear,color:themeProvider.isDarkMode? Colors.white :const Color(0xFF17212C)),
                 ),
               ),
               onChanged: (value) {

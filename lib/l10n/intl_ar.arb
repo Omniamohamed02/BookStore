@@ -37,6 +37,11 @@
   "addedToFav": "تمت الإضافة إلى المفضلة",
   "addedTCart": "تمت إضافة الكتاب إلى سلة التسوق بنجاح!",
   "orderSnak": "تم طلب طلبك بنجاح  !",
+  "SearchCategory": "البحث في الفئات",
+  "Search": "البحث في ",
+  "rate": "تقيم",
+  "searchForaBook": "ابحث عن كتاب",
+  "searchForaCategory": "ابحث عن فئة",
   "@title": {
     "description": "عنوان التطبيق"
   }

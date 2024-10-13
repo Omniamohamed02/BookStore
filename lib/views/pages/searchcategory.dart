@@ -1,6 +1,7 @@
 import 'package:bookstore/views/pages/description.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../generated/l10n.dart';
 import '../../model/book.dart';
 import '../../providers/theme_provider.dart';
 
@@ -70,9 +71,12 @@ class _SearchBooksInCategoryState extends State<SearchBooksInCategory> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemesProvider>(context);
+    final localizations = S.of(context);
     return Scaffold(
+      backgroundColor: themeProvider.isDarkMode ? Color(0xFF303E44) : Colors.white,
       appBar: AppBar(
-        title: Text('Search in ${widget.category}'),
+        backgroundColor:themeProvider.isDarkMode ? Color(0xFF303E44) : Color(0xFFF2D9BB),
+        title: Text('${localizations.Search} ${widget.category}'),
       ),
       body: Column(
         children: [
@@ -82,14 +86,14 @@ class _SearchBooksInCategoryState extends State<SearchBooksInCategory> {
               controller: searchController,
               decoration: InputDecoration(
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: themeProvider.isDarkMode ? Color(0xFF4F5B61) : Colors.white,
                 contentPadding: const EdgeInsets.symmetric(vertical: 15.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
                   borderSide: const BorderSide(width: 0.8, color: Color(0xFF17212C)),
                 ),
-                hintText: 'Search for a Book',
-                prefixIcon: const Icon(Icons.search, size: 30, color: Color(0xFF17212C)),
+                hintText: localizations.searchForaBook,
+                prefixIcon:  Icon(Icons.search, size: 30, color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C) ),
                 suffixIcon: IconButton(
                   onPressed: () {
                     searchController.clear();
@@ -97,13 +101,14 @@ class _SearchBooksInCategoryState extends State<SearchBooksInCategory> {
                       suggestions = [];
                     });
                   },
-                  icon: const Icon(Icons.clear, color: Color(0xFF17212C)),
+                  icon:  Icon(Icons.clear, color: themeProvider.isDarkMode? Colors.white : Color(0xFF17212C)),
                 ),
               ),
               onChanged: (value) {
                 filterSuggestions(value);
               },
             ),
+
           ),
           Expanded(
             child: suggestions.isNotEmpty

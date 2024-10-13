@@ -37,6 +37,11 @@
   "addedToFav": "Added to favorite !",
   "addedTCart": "Book added to cart  successfully !",
   "orderSnak": "your order is ordered successfully !",
+  "SearchCategory": "Search Categories",
+  "Search": "Search in ",
+  "rate": "Rate",
+  "searchForaBook": "Search for a Book ",
+  "searchForaCategory": "Search for a Category",
   "@title": {
     "description": "The title of the app."
   }
