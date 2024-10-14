@@ -34,15 +34,15 @@ class BookCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                Text(book.title.length > 20
-                    ? '${book.title.substring(0, 20)}...'
+                Text(book.title.length > 15
+                    ? '${book.title.substring(0, 15)}...'
                     : book.title, style: TextStyle(
                     color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C),
                   fontSize: 16,
                   fontWeight: FontWeight.bold),
                  ),
-                   Text(book.authors.length > 20
-                       ? '${book.authors.substring(0, 20)}...'
+                   Text(book.authors.length > 15
+                       ? '${book.authors.substring(0, 15)}...'
                        : book.authors,
               style:  TextStyle( color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C), fontSize: 12,),)
                 ],
