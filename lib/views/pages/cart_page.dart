@@ -20,7 +20,7 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemesProvider>(context);
     final cart = Provider.of<CartProvider>(context);
-    final languageProvider = Provider.of<LanguageProvider>(context);
+
     final localizations = S.of(context);
 
     return Scaffold(
@@ -58,7 +58,7 @@ class _CartPageState extends State<CartPage> {
                       context: context,
                       builder: (BuildContext context) {
                       return AlertDialog(
-                          title:  Text('${localizations.buyNow}'),
+                          title:  Text('${localizations.buyNow}',style: TextStyle(color:themeProvider.isDarkMode? Colors.white : Color(0xFF17212C) ),),
                           content:  SingleChildScrollView(
                             child: ListBody(
                               children:[
